@@ -1,8 +1,6 @@
 package dao;
-
 import model.Categoria;
 import util.DatabaseConnection;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +16,7 @@ public class CategoriaDAOImpl implements CategoriaDAO {
             ps.setString(2, categoria.getDescripcion());
             ps.executeUpdate();
             System.out.println("✅ Categoría insertada correctamente.");
-        } catch (SQLException e) {
+        } catch (Exception e) {
             System.out.println("❌ Error al insertar categoría: " + e.getMessage());
         }
     }
@@ -37,7 +35,7 @@ public class CategoriaDAOImpl implements CategoriaDAO {
                     rs.getString("descripcion")
                 );
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             System.out.println("❌ Error al buscar categoría: " + e.getMessage());
         }
         return null;
@@ -57,7 +55,7 @@ public class CategoriaDAOImpl implements CategoriaDAO {
                     rs.getString("descripcion")
                 ));
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             System.out.println("❌ Error al listar categorías: " + e.getMessage());
         }
         return lista;
@@ -73,7 +71,7 @@ public class CategoriaDAOImpl implements CategoriaDAO {
             ps.setInt(3, categoria.getIdCategoria());
             ps.executeUpdate();
             System.out.println("✅ Categoría actualizada correctamente.");
-        } catch (SQLException e) {
+        } catch (Exception e) {
             System.out.println("❌ Error al actualizar categoría: " + e.getMessage());
         }
     }
@@ -86,7 +84,7 @@ public class CategoriaDAOImpl implements CategoriaDAO {
             ps.setInt(1, id);
             ps.executeUpdate();
             System.out.println("✅ Categoría eliminada correctamente.");
-        } catch (SQLException e) {
+        } catch (Exception e) {
             System.out.println("❌ Error al eliminar categoría: " + e.getMessage());
         }
     }

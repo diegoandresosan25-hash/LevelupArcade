@@ -1,8 +1,6 @@
 package dao;
-
 import model.Proveedor;
 import util.DatabaseConnection;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +18,7 @@ public class ProveedorDAOImpl implements ProveedorDAO {
             ps.setString(4, proveedor.getDireccion());
             ps.executeUpdate();
             System.out.println("✅ Proveedor insertado correctamente.");
-        } catch (SQLException e) {
+        } catch (Exception e) {
             System.out.println("❌ Error al insertar proveedor: " + e.getMessage());
         }
     }
@@ -41,7 +39,7 @@ public class ProveedorDAOImpl implements ProveedorDAO {
                     rs.getString("direccion")
                 );
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             System.out.println("❌ Error al buscar proveedor: " + e.getMessage());
         }
         return null;
@@ -63,7 +61,7 @@ public class ProveedorDAOImpl implements ProveedorDAO {
                     rs.getString("direccion")
                 ));
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             System.out.println("❌ Error al listar proveedores: " + e.getMessage());
         }
         return lista;
@@ -81,7 +79,7 @@ public class ProveedorDAOImpl implements ProveedorDAO {
             ps.setInt(5, proveedor.getIdProveedor());
             ps.executeUpdate();
             System.out.println("✅ Proveedor actualizado correctamente.");
-        } catch (SQLException e) {
+        } catch (Exception e) {
             System.out.println("❌ Error al actualizar proveedor: " + e.getMessage());
         }
     }
@@ -94,7 +92,7 @@ public class ProveedorDAOImpl implements ProveedorDAO {
             ps.setInt(1, id);
             ps.executeUpdate();
             System.out.println("✅ Proveedor eliminado correctamente.");
-        } catch (SQLException e) {
+        } catch (Exception e) {
             System.out.println("❌ Error al eliminar proveedor: " + e.getMessage());
         }
     }

@@ -1,8 +1,6 @@
 package dao;
-
 import model.Cliente;
 import util.DatabaseConnection;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +18,7 @@ public class ClienteDAOImpl implements ClienteDAO {
             ps.setString(4, cliente.getDireccion());
             ps.executeUpdate();
             System.out.println("✅ Cliente insertado correctamente.");
-        } catch (SQLException e) {
+        } catch (Exception e) {
             System.out.println("❌ Error al insertar cliente: " + e.getMessage());
         }
     }
@@ -41,7 +39,7 @@ public class ClienteDAOImpl implements ClienteDAO {
                     rs.getString("direccion")
                 );
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             System.out.println("❌ Error al buscar cliente: " + e.getMessage());
         }
         return null;
@@ -63,7 +61,7 @@ public class ClienteDAOImpl implements ClienteDAO {
                     rs.getString("direccion")
                 ));
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             System.out.println("❌ Error al listar clientes: " + e.getMessage());
         }
         return lista;
@@ -81,7 +79,7 @@ public class ClienteDAOImpl implements ClienteDAO {
             ps.setInt(5, cliente.getIdCliente());
             ps.executeUpdate();
             System.out.println("✅ Cliente actualizado correctamente.");
-        } catch (SQLException e) {
+        } catch (Exception e) {
             System.out.println("❌ Error al actualizar cliente: " + e.getMessage());
         }
     }
@@ -94,7 +92,7 @@ public class ClienteDAOImpl implements ClienteDAO {
             ps.setInt(1, id);
             ps.executeUpdate();
             System.out.println("✅ Cliente eliminado correctamente.");
-        } catch (SQLException e) {
+        } catch (Exception e) {
             System.out.println("❌ Error al eliminar cliente: " + e.getMessage());
         }
     }

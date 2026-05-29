@@ -1,20 +1,33 @@
 package util;
 
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Properties;
 
 public class DatabaseConnection {
 
-    private static final String URL = "jdbc:mysql://192.168.1.22:3308/level_up";
-    private static final String USER = "DIEGO";
-    private static final String PASSWORD = "tu_contraseña_aqui";
-
     private static Connection connection = null;
 
-    public static Connection getConnection() throws SQLException {
+    private static Properties loadProperties() throws Exception {
+        Properties props = new Properties();
+        InputStream input = DatabaseConnection.class
+                .getClassLoader()
+                .getResourceAsStream("config.properties");
+        if (input == null) throw new Exception("No se encontró config.properties");
+        props.load(input);
+        return props;
+    }
+
+    public static Connection getConnection() throws Exception {
         if (connection == null || connection.isClosed()) {
-            connection = DriverManager.getConnection(URL, USER, PASSWORD);
+            Properties props = loadProperties();
+            connection = DriverManager.getConnection(
+                    props.getProperty("db.url"),
+                    props.getProperty("db.user"),
+                    props.getProperty("db.password")
+            );
         }
         return connection;
     }

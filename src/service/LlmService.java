@@ -3,7 +3,6 @@ package service;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -11,16 +10,14 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
 public class LlmService {
-
     private static final String API_URL = "https://openrouter.ai/api/v1/chat/completions";
     private static final String API_KEY = System.getenv("OPENROUTER_API_KEY");
-    private static final String MODEL = "mistralai/mistral-7b-instruct:free";
+    private static final String MODEL = "openrouter/owl-alpha";
 
     public String preguntar(String prompt) {
         if (API_KEY == null || API_KEY.isEmpty()) {
             return "❌ API Key no configurada. Configura la variable de entorno OPENROUTER_API_KEY.";
         }
-
         try {
             JsonObject mensaje = new JsonObject();
             mensaje.addProperty("role", "user");
@@ -38,12 +35,21 @@ public class LlmService {
                 .uri(URI.create(API_URL))
                 .header("Content-Type", "application/json")
                 .header("Authorization", "Bearer " + API_KEY)
+                .header("HTTP-Referer", "https://leveluparcade.app")
+                .header("X-Title", "LevelUpArcade")
                 .POST(HttpRequest.BodyPublishers.ofString(body.toString()))
                 .build();
 
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            String responseBody = response.body();
+            
 
-            JsonObject json = JsonParser.parseString(response.body()).getAsJsonObject();
+            JsonObject json = JsonParser.parseString(responseBody).getAsJsonObject();
+
+            if (json.has("error")) {
+                return "❌ Error de la API: " + json.getAsJsonObject("error").get("message").getAsString();
+            }
+
             return json.getAsJsonArray("choices")
                        .get(0).getAsJsonObject()
                        .getAsJsonObject("message")

@@ -1,7 +1,6 @@
 package util;
 
 import java.sql.Connection;
-import java.sql.SQLException;
 
 public class TestConexion {
 
@@ -12,7 +11,7 @@ public class TestConexion {
                 System.out.println("✅ Conexión exitosa a la base de datos.");
                 DatabaseConnection.closeConnection();
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             System.out.println("❌ Error de conexión: " + e.getMessage());
         }
     }

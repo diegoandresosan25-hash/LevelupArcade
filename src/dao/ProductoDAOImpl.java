@@ -21,7 +21,7 @@ public class ProductoDAOImpl implements ProductoDAO {
             ps.setInt(5, producto.getIdCategoria());
             ps.executeUpdate();
             System.out.println("✅ Producto insertado correctamente.");
-        } catch (SQLException e) {
+        } catch (Exception e) {
             System.out.println("❌ Error al insertar producto: " + e.getMessage());
         }
     }
@@ -43,7 +43,7 @@ public class ProductoDAOImpl implements ProductoDAO {
                     rs.getInt("id_categoria")
                 );
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             System.out.println("❌ Error al buscar producto: " + e.getMessage());
         }
         return null;
@@ -66,7 +66,7 @@ public class ProductoDAOImpl implements ProductoDAO {
                     rs.getInt("id_categoria")
                 ));
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             System.out.println("❌ Error al listar productos: " + e.getMessage());
         }
         return lista;
@@ -85,7 +85,7 @@ public class ProductoDAOImpl implements ProductoDAO {
             ps.setInt(6, producto.getIdProducto());
             ps.executeUpdate();
             System.out.println("✅ Producto actualizado correctamente.");
-        } catch (SQLException e) {
+        } catch (Exception e) {
             System.out.println("❌ Error al actualizar producto: " + e.getMessage());
         }
     }
@@ -98,7 +98,7 @@ public class ProductoDAOImpl implements ProductoDAO {
             ps.setInt(1, id);
             ps.executeUpdate();
             System.out.println("✅ Producto eliminado correctamente.");
-        } catch (SQLException e) {
+        } catch (Exception e) {
             System.out.println("❌ Error al eliminar producto: " + e.getMessage());
         }
     }
